@@ -1,0 +1,24 @@
+*** Settings ***
+Documentation     A test suite for IAPI intents.
+...
+...               KAI en_US iapi intents.
+Library     CAPILibrary.py
+
+Test Template    Run keyword and continue on failure
+
+*** Test Cases ***
+
+`activate my card`
+	[Documentation]	Test Get User Account Information with token `token1`
+	...	Test Card Activation 2.3.1
+	[Tags]  CLASSIC_INTENT Card Activation 
+
+    User logs in with token `tokenACME^Cards`
+    User says `i want to activate my card`
+    Bot says `What's the card number?`
+    User says `4114 1234 1234 1234`
+    Bot says `What's the security code? It's the 3-digit code on the back of the card.`
+    User says `329`
+    Bot says `What's the expiration date?`
+    User says `11/20`
+    Bot says `OK. You're all set. Your card is activated and ready for use.`

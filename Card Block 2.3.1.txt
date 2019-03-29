@@ -1,0 +1,24 @@
+*** Settings ***
+Documentation     A test suite for IAPI intents.
+...
+...               KAI en_US iapi intents.
+Library     CAPILibrary.py
+
+Test Template    Run keyword and continue on failure
+
+*** Test Cases ***
+
+`activate my card`
+	[Documentation]	Test Get User Account Information with token `token1`
+	...	    Card Block 2.3.1
+	[Tags]  CLASSIC_INTENT Card block 
+
+    User logs in with token `tokenACME^Cards`
+    User says `I want to block my card`
+    Bot says `Sorry to hear that. Which card?`
+    Bot shows some of these quick replies [`Visa Credit Card(1022)`, `VISA Platinum(4985)`]
+    User clicks on `Visa Credit Card(1022)` quick reply
+    Bot says `OK. You'd like to block your Visa Credit Card(1022). Is that right?`
+    Bot shows some of these quick replies [`Yes`, `No`]
+    User clicks on `Yes` quick reply
+    Bot says `OK. You're all set. Your card has been blocked. As reminder, you still have a $35,857.47 balance due on this account. To unblock your card all you have to do is ask.`
